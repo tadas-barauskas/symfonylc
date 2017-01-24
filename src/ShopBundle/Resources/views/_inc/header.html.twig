@@ -1,0 +1,17 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url('shop_gadget_list') }}">Gadget Shop</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% set searchForm = shop_search.getSearchFormView() %}
+            {{ form_start(searchForm, {'attr': {'class': 'navbar-form navbar-right'} }) }}
+                <div class="form-group">
+                    {{ form_widget(searchForm.search, {'attr': {'class': 'form-control'} }) }}
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            {{ form_end(searchForm) }}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,39 @@
+{% extends "ShopBundle::layout.html.twig" %}
+
+{% block title %}Gadget Shop - {{ gadget.title }}{% endblock %}
+
+{% block body %}
+    {% include 'ShopBundle:_inc:header.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="detail-image">
+                    <img src="{{ gadget.image }}" alt="{{ gadget.title }}">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row detail-info">
+                    <div class="row">
+                        <div class="col-md-2"><strong><span>Manufacturer: </span></strong></div>
+                        <div class="col-md-10"><span>{{ gadget.manufacturer }}</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><strong><span>Title:</span></strong></div>
+                        <div class="col-md-10"><span>{{ gadget.title }}</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><strong><span>Price:</span></strong></div>
+                        <div class="col-md-10"><span>{{ gadget.price }}</span></div>
+                    </div>
+                </div>
+                <div class="row detail-actions">
+                    <form class="form-inline">
+                        <label class="sr-only" for="quantity">Quantity</label>
+                        <input type="text" class="form-control" id="quantity" value="1">
+                        <button type="button" class="btn btn-success">Add to basket</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

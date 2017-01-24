@@ -1,0 +1,31 @@
+{% extends "ShopBundle::layout.html.twig" %}
+
+{% block title %}Search - {{ needle }}{% endblock %}
+
+{% block body %}
+    {% include 'ShopBundle:_inc:header.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"> {{ gadgets|length }} Search results for "{{ needle }}"</div>
+        </div>
+        <div class="row">
+            {%  for gadget in gadgets %}
+                <div class="col-md-4">
+                    <a href="{{ url('shop_gadget_detail', {'id': gadget.id}) }}">
+                        <div class="row list-thumb">
+                            <div class="col-md-12">
+                                <img src="{{ gadget.image }}" alt="{{ gadget.title }}">
+                            </div>
+                        </div>
+                        <div class="row list-info">
+                            <div class="col-md-12">
+                                <span class="gadget-title">{{ gadget.title }}</span>
+                                <span class="gadget-price">{{ gadget.price }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
