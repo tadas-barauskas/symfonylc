@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function listAction(Request $request, $page = 1)
     {
-        $needle = $request->request->get('form')['search'];
+        $needle = $request->get('search');
         $needle = htmlspecialchars($needle, ENT_HTML5);
         $gadgets = $this->get('shop.gadget_repository')->findForSearch($needle, $page);
 
