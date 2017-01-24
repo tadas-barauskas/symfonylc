@@ -2,3 +2,8 @@ services:
     shop.search:
         class: ShopBundle\Services\SearchService
         arguments: ['@form.factory', '@router']
+    shop.price_twig_extension:
+        class: ShopBundle\Twig\PriceExtension
+        public: false
+        tags:
+            - { name: twig.extension }
