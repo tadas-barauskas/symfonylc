@@ -38,9 +38,9 @@ class GadgetRepository extends EntityRepository
                 "SELECT g FROM ShopBundle:Gadget g WHERE g.title like :needle or g.manufacturer like :needle"
             )
             ->setParameter('needle', "%$needle%");
-        $paginator = $this->paginate($query, $page);
+        $pagination = $this->paginate($query, $page);
 
-        return $paginator;
+        return $pagination;
     }
 
     public function paginate($query, $page = 1, $limit = 12)

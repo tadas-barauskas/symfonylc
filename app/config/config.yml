@@ -39,8 +39,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
-        shop_search: '@shop.search'
 
 # Doctrine Configuration
 doctrine:

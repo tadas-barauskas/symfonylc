@@ -5,13 +5,12 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            {% set searchForm = shop_search.getSearchFormView() %}
-            {{ form_start(searchForm, {'attr': {'class': 'navbar-form navbar-right'} }) }}
+            <form action="{{ path('shop_gadget_search') }}" class="navbar-form navbar-right">
                 <div class="form-group">
-                    {{ form_widget(searchForm.search, {'attr': {'class': 'form-control'} }) }}
+                    <input type="text" name="search" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
-            {{ form_end(searchForm) }}
+            </form>
         </div>
     </div>
 </nav>

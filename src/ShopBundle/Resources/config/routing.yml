@@ -1,6 +1,6 @@
 shop_gadget_search:
-    path:     /search//{page}/{needle}
-    defaults: { _controller: ShopBundle:Search:list, page: 1, needle: null }
+    path:     /search/{page}
+    defaults: { _controller: ShopBundle:Search:list, page: 1 }
 
 shop_gadget_detail:
     path:     /detail/{id}
