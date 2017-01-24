@@ -9,17 +9,14 @@ class GadgetController extends Controller
 {
     public function listAction($page)
     {
-        $em = $this->getDoctrine()->getManager();
-        $gadgets = $em->getRepository('ShopBundle:Gadget')->findAllGadgets($page);
-        $maxPages = ceil($gadgets->count() / 12);
+        $gadgets = $this->get('shop.gadget_repository')->findAllGadgets($page);
 
-        return $this->render('ShopBundle:Gadget:list.html.twig', compact('gadgets', 'page', 'maxPages'));
+        return $this->render('ShopBundle:Gadget:list.html.twig', compact('gadgets'));
     }
 
     public function detailAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $gadget = $em->getRepository('ShopBundle:Gadget')->find($id);
+        $gadget = $this->get('shop.gadget_repository')->find($id);
 
         return $this->render('ShopBundle:Gadget:detail.html.twig', compact('gadget'));
     }

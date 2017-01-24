@@ -78,10 +78,28 @@ assetic:
     filters:
         cssrewrite: ~
     assets:
+        jquery_js:
+            inputs:
+                - 'https://code.jquery.com/jquery-3.1.1.min.js'
         bootstrap_js:
             inputs:
                 - 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
+        shop_js:
+            inputs:
+                - '@jquery_js'
+                - '@bootstrap_js'
         bootstrap_css:
             inputs:
                 - 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
                 - 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css'
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: false                # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
