@@ -6,7 +6,7 @@
     {% include 'ShopBundle:_inc:header.html.twig' %}
     <div class="container">
         <div class="row">
-            <div class="col-md-3"> {{ gadgets|length }} Search results for "{{ needle }}"</div>
+            <div class="col-md-3"> {{ gadgets.getTotalItemCount() }} Search results for "{{ needle }}"</div>
             <div class="col-md-1 col-md-offset-5">Sort by:</div>
             <div class="col-md-2">
                 <span {% if gadgets.isSorted('g.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(gadgets, 'Title', 'g.title') }}</span>
