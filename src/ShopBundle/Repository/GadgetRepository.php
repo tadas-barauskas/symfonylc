@@ -13,26 +13,36 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class GadgetRepository extends EntityRepository
 {
-    public function findAllGadgets()
+    public function findAllGadgets($page)
     {
-        return $this->getEntityManager()
+        $query = $this->getEntityManager()
             ->createQuery(
                 'SELECT g FROM ShopBundle:Gadget g'
-            )
-            ->setMaxResults(12)
-            ->getResult();
+            );
+        $paginator = $this->paginate($query, $page);
+
+        return $paginator;
     }
 
-    public function findForSearch($needle)
+    public function findForSearch($needle, $page)
     {
-        $result = $this->getEntityManager()
+        $query = $this->getEntityManager()
             ->createQuery(
                 "SELECT g FROM ShopBundle:Gadget g WHERE g.title like :needle or g.manufacturer like :needle"
             )
-            ->setParameter('needle', "%$needle%")
-            ->setMaxResults(12)
-            ->getResult();
+            ->setParameter('needle', "%$needle%");
+        $paginator = $this->paginate($query, $page);
 
-        return $result;
+        return $paginator;
+    }
+
+    public function paginate($dql, $page = 1, $limit = 12)
+    {
+        $paginator = new Paginator($dql);
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1))
+            ->setMaxResults($limit);
+
+        return $paginator;
     }
 }

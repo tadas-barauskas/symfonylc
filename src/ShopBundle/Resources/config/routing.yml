@@ -1,11 +1,11 @@
-shop_gadget_list:
-    path:     /
-    defaults: { _controller: ShopBundle:Gadget:list }
+shop_gadget_search:
+    path:     /search//{page}/{needle}
+    defaults: { _controller: ShopBundle:Search:list, page: 1, needle: null }
 
 shop_gadget_detail:
     path:     /detail/{id}
     defaults: { _controller: ShopBundle:Gadget:detail }
 
-shop_gadget_search:
-    path:     /search/{needle}
-    defaults: { _controller: ShopBundle:Search:list, needle: null }
+shop_gadget_list:
+    path:     /{page}
+    defaults: { _controller: ShopBundle:Gadget:list, page: 1 }

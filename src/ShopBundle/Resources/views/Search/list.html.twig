@@ -27,5 +27,10 @@
                 </div>
             {% endfor %}
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'ShopBundle:_inc:paging.html.twig' with {routeName: 'shop_gadget_search', params: {'needle': needle}} %}
+            </div>
+        </div>
     </div>
 {% endblock %}
