@@ -9,5 +9,3 @@ services:
         class: Doctrine\ORM\EntityRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: [ShopBundle\Entity\Gadget]
-        calls:
-            - [setPaginator, ["@knp_paginator"]]
