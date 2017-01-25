@@ -13,7 +13,11 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path('login') }}">Login</a></li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="{{ path('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ path('login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

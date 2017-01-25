@@ -25,3 +25,6 @@ security:
                 check_path: login
                 csrf_token_generator: security.csrf.token_manager
                 provider: shop_db_provider
+            logout:
+                path:   /logout
+                target: /
