@@ -1,3 +1,11 @@
+login:
+    path:     /login
+    defaults: { _controller: ShopBundle:Security:login }
+
+shop_registration:
+    path:     /register
+    defaults: { _controller: ShopBundle:Security:register }
+
 shop_gadget_search:
     path:     /search/{page}
     defaults: { _controller: ShopBundle:Search:list, page: 1 }
