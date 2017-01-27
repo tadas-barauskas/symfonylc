@@ -25,6 +25,11 @@ security:
                 check_path: login
                 csrf_token_generator: security.csrf.token_manager
                 provider: shop_db_provider
+                use_referer: true
             logout:
                 path:   /logout
                 target: /
+                invalidate_session: true
+
+    access_control:
+        - { path: ^/basket, roles: ROLE_USER }

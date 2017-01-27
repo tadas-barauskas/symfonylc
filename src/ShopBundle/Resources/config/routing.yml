@@ -19,3 +19,8 @@ shop_gadget_detail:
 shop_gadget_list:
     path:     /{page}
     defaults: { _controller: ShopBundle:Gadget:list, page: 1 }
+
+add_basket_item:
+    path:     /basket/add
+    methods:  'POST'
+    defaults: { _controller: ShopBundle:Basket:add }

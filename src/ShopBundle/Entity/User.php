@@ -19,6 +19,11 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="Basket", mappedBy="user")
+     */
+    private $basket;
+
+    /**
      * @ORM\Column(type="string", length=25, unique=true)
      * @Assert\NotBlank()
      */
@@ -213,5 +218,29 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    /**
+     * Set basket
+     *
+     * @param \ShopBundle\Entity\Basket $basket
+     *
+     * @return User
+     */
+    public function setBasket(\ShopBundle\Entity\Basket $basket = null)
+    {
+        $this->basket = $basket;
+
+        return $this;
+    }
+
+    /**
+     * Get basket
+     *
+     * @return \ShopBundle\Entity\Basket
+     */
+    public function getBasket()
+    {
+        return $this->basket;
     }
 }
