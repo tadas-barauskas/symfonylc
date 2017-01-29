@@ -25,6 +25,7 @@ class BasketController extends Controller
         if (is_null($basket)) {
             $basket = $this->createBasket();
         }
+
         return $basket;
     }
 

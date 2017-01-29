@@ -89,11 +89,7 @@ class Basket
      */
     public function addBasketItem(\ShopBundle\Entity\BasketItem $basketItem)
     {
-        $gadgetId = $basketItem->getGadgetId();
-        if ($oldItem = $this->basketItems[$gadgetId]) {
-            $basketItem->setAmount($basketItem->getAmount() + $oldItem->getAmount());
-        }
-        $this->basketItems[$basketItem->getGadgetId()] = $basketItem;
+        $this->basketItems[] = $basketItem;
 
         return $this;
     }
@@ -120,19 +116,13 @@ class Basket
 
     public function getBasketItem($gadgetId)
     {
-        if (isset($this->basketItems[$gadgetId])) {
-            return $this->basketItems[$gadgetId];
+        foreach ($this->basketItems as $basketItem) {
+            if ($gadgetId == $basketItem->getGadgetId()) {
+                return $basketItem;
+            }
         }
     }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function updateTimestamp()
-    {
-        $this->timestamp = new \DateTime();
-    }
-
+    
     /**
      * Set timestamp
      *
@@ -155,5 +145,13 @@ class Basket
     public function getTimestamp()
     {
         return $this->timestamp;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function updateTimestamp()
+    {
+        $this->timestamp = new \DateTime();
     }
 }
