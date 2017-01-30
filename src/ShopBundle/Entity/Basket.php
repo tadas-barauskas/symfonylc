@@ -117,12 +117,12 @@ class Basket
     public function getBasketItem($gadgetId)
     {
         foreach ($this->basketItems as $basketItem) {
-            if ($gadgetId == $basketItem->getGadgetId()) {
+            if ($gadgetId == $basketItem->getGadget()->getId()) {
                 return $basketItem;
             }
         }
     }
-    
+
     /**
      * Set timestamp
      *
@@ -153,5 +153,20 @@ class Basket
     public function updateTimestamp()
     {
         $this->timestamp = new \DateTime();
+    }
+
+    public function getTotalPrice()
+    {
+        $price = 0;
+        foreach ($this->basketItems as $basketItem) {
+            $price += $basketItem->getPrice();
+        }
+
+        return $price;
+    }
+
+    public function containsItem($basketItem)
+    {
+        return $this->basketItems->contains($basketItem);
     }
 }

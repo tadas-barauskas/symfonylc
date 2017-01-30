@@ -90,6 +90,12 @@ assetic:
             inputs:
                 - 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
                 - 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css'
+        shop_css:
+            inputs:
+                - '@bootstrap_css'
+                - '@ShopBundle/Resources/public/css/basket.css'
+
+
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control

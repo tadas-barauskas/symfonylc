@@ -24,3 +24,6 @@ add_basket_item:
     path:     /basket/add
     methods:  'POST'
     defaults: { _controller: ShopBundle:Basket:add }
+remove_basket_item:
+    path:     /basket/remove/{id}
+    defaults: { _controller: ShopBundle:Basket:remove }

@@ -2,6 +2,12 @@
 
 {% block title %}Gadget list{% endblock %}
 
+{% block stylesheets %}
+    {% stylesheets '@shop_css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
     {% include 'ShopBundle:_inc:header.html.twig' %}
     <div class="container">
@@ -13,23 +19,31 @@
             </div>
         </div>
         <div class="row">
-            {%  for gadget in gadgets %}
-                <div class="col-md-4">
-                <a href="{{ url('shop_gadget_detail', {'id': gadget.id}) }}">
-                    <div class="row list-thumb">
-                        <div class="col-md-12">
-                                <img src="{{ gadget.image }}" alt="{{ gadget.title }}">
+            <div class="col-md-9">
+                    {%  for gadget in gadgets %}
+                        <div class="col-md-4">
+                            <a href="{{ url('shop_gadget_detail', {'id': gadget.id}) }}">
+                                <div class="row list-thumb">
+                                    <div class="col-md-12">
+                                            <img src="{{ gadget.image }}" alt="{{ gadget.title }}">
+                                    </div>
+                                </div>
+                                <div class="row list-info">
+                                    <div class="col-md-12">
+                                        <span class="gadget-title">{{ gadget.title }}</span>
+                                        <span class="gadget-price">{{ gadget.price|price }}</span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="row list-info">
-                        <div class="col-md-12">
-                            <span class="gadget-title">{{ gadget.title }}</span>
-                            <span class="gadget-price">{{ gadget.price|price }}</span>
-                        </div>
-                    </div>
-                </a>
+                    {% endfor %}
+            </div>
+            {% if app.user %}
+                <div id="basket-container" class="col-md-3 basket-container">
+                    {% include 'ShopBundle:Basket:_inc/list.html.twig' %}
                 </div>
-            {% endfor %}
+            {% endif %}
+
         </div>
         <div class="row pagination-control">
             {{ knp_pagination_render(gadgets) }}

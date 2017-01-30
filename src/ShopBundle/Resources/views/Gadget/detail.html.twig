@@ -2,16 +2,22 @@
 
 {% block title %}Gadget Shop - {{ gadget.title }}{% endblock %}
 
+{% block stylesheets %}
+    {% stylesheets '@shop_css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
     {% include 'ShopBundle:_inc:header.html.twig' %}
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="detail-image">
                     <img src="{{ gadget.image }}" alt="{{ gadget.title }}">
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="row detail-info">
                     <div class="row">
                         <div class="col-md-2"><strong><span>Manufacturer: </span></strong></div>
@@ -35,6 +41,11 @@
                     </form>
                 </div>
             </div>
+            {% if app.user %}
+                <div id="basket-container" class="col-md-3 basket-container">
+                    {% include 'ShopBundle:Basket:_inc/list.html.twig' %}
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

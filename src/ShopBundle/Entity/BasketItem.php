@@ -24,9 +24,10 @@ class BasketItem
     private $basket;
 
     /**
-     * @ORM\Column(name="gadget_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Gadget")
+     * @ORM\JoinColumn(name="gadget_id", referencedColumnName="id")
      */
-    private $gadgetId;
+    private $gadget;
 
     /**
      * @ORM\Column(type="integer")
@@ -41,30 +42,6 @@ class BasketItem
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set gadgetId
-     *
-     * @param integer $gadgetId
-     *
-     * @return BasketItem
-     */
-    public function setGadgetId($gadgetId)
-    {
-        $this->gadgetId = $gadgetId;
-
-        return $this;
-    }
-
-    /**
-     * Get gadgetId
-     *
-     * @return integer
-     */
-    public function getGadgetId()
-    {
-        return $this->gadgetId;
     }
 
     /**
@@ -113,5 +90,34 @@ class BasketItem
     public function getBasket()
     {
         return $this->basket;
+    }
+
+    /**
+     * Set gadget
+     *
+     * @param \ShopBundle\Entity\Gadget $gadget
+     *
+     * @return BasketItem
+     */
+    public function setGadget(\ShopBundle\Entity\Gadget $gadget = null)
+    {
+        $this->gadget = $gadget;
+
+        return $this;
+    }
+
+    /**
+     * Get gadget
+     *
+     * @return \ShopBundle\Entity\Gadget
+     */
+    public function getGadget()
+    {
+        return $this->gadget;
+    }
+
+    public function getPrice()
+    {
+        return $this->getGadget()->getPrice() * $this->getAmount();
     }
 }

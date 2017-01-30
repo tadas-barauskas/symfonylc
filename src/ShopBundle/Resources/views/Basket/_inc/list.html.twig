@@ -1,0 +1,40 @@
+{% if app.user.basket is defined %}
+    {% set basket = app.user.basket %}
+    {% if basket.basketItems|length > 0 %}
+        <div class="row basket-title">
+            <h3>Basket</h3>
+        </div>
+
+        <div class="row basket-details">
+            {% for item in basket.basketItems %}
+                {% set gadget = item.getGadget() %}
+                <div class="row">
+                    <div class="col-md-3 basket-gadget-picture">
+                        <img src="{{ gadget.image }}" alt="{{ gadget.title }}">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <span>{{ gadget.manufacturer }} {{ gadget.title }}</span>
+                        </div>
+                        <div class="row">
+                            <span>Amount: {{ item.amount }}</span>
+                        </div>
+                        <div class="row">
+                            <span>Price: {{ item.getPrice()|price }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row actions">
+                    <div class="col-md-12">
+                        <a href="{{ path('remove_basket_item', {'id': item.id}) }}">Remove item</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row basket-totals">
+            <div class="col-md-12">
+                <strong><span>Total: {{ basket.getTotalPrice()|price }}</span></strong>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
