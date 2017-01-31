@@ -1,4 +1,4 @@
-{% if app.user.basket is defined %}
+{% if app.user.basket is defined and app.user.basket is not null%}
     {% set basket = app.user.basket %}
     {% if basket.basketItems|length > 0 %}
         <div class="row basket-title">
