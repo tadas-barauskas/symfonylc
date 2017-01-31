@@ -1,18 +1,4 @@
 <?php
-/**
- * Class ${CLASS_NAME}
- *
- * This Software is the property of superReal and is protected
- * by copyright law - it is NOT Freeware.
- *
- * Any unauthorized use of this software without a valid license key
- * is a violation of the license agreement and will be prosecuted by
- * civil and criminal law.
- *
- * @link http://www.superreal.de
- * @copyright (C) superReal 2017
- * @author Tadas Barauskas <t.barauskas _AT_ superreal.de>
- */
 
 namespace ShopBundle\Controller;
 

@@ -9,3 +9,14 @@ services:
         class: Doctrine\ORM\EntityRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: [ShopBundle\Entity\Gadget]
+
+    shop.basket_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: [ShopBundle\Entity\Basket]
+
+    shop.basket_listener:
+        class: ShopBundle\EventListener\BasketListener
+        arguments: ['@logger']
+        tags:
+            - { name: kernel.event_listener, event: basket.expired, method: onBasketExpired }

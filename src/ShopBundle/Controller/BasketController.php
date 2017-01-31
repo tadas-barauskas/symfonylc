@@ -15,6 +15,7 @@ class BasketController extends Controller
         $gadgetId = $request->get('gadgetId');
         $amount = $request->get('amount');
         $this->addItemToBasket($basket, $gadgetId, $amount);
+        $this->updateBasket($basket);
 
         return $this->redirectToRoute('shop_gadget_detail', ['id' => $gadgetId]);
     }
@@ -33,9 +34,7 @@ class BasketController extends Controller
     {
         $basket = new Basket();
         $basket->setUser($this->getUser());
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($basket);
-        $em->flush();
+        $this->saveEntity($basket);
 
         return $basket;
     }
@@ -45,12 +44,30 @@ class BasketController extends Controller
         if (!$basketItem = $basket->getBasketItem($gadgetId)) {
             $basketItem = new BasketItem();
         }
-        $em = $this->getDoctrine()->getManager();
-        $basketItem->setGadget($em->getReference('ShopBundle:Gadget', $gadgetId));
+        $basketItem->setGadget($this->getGadgetReference($gadgetId));
         $basketItem->setAmount($amount);
         $basketItem->setBasket($basket);
+        $this->saveEntity($basketItem);
+    }
 
-        $em->persist($basketItem);
+    private function getGadgetReference($gadgetId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $gadgetReference = $em->getReference('ShopBundle:Gadget', $gadgetId);
+
+        return $gadgetReference;
+    }
+
+    private function updateBasket($basket)
+    {
+        $basket->updateTimestamp();
+        $this->saveEntity($basket);
+    }
+
+    private function saveEntity($basket)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($basket);
         $em->flush();
     }
 

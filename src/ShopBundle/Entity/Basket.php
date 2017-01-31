@@ -21,7 +21,7 @@ class Basket
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="basket")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -150,6 +150,11 @@ class Basket
     /**
      * @ORM\PrePersist
      */
+    public function setPreUpdateConfiguration()
+    {
+        $this->updateTimestamp();
+    }
+
     public function updateTimestamp()
     {
         $this->timestamp = new \DateTime();
